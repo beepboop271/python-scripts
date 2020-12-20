@@ -1,7 +1,6 @@
-# meme script to download pictures of horses off
-# google images and put it in a folder called the back
-# so that you can have the horses in the back
-
+# meme script to download pictures of horses off google images
+# and put it in a folder called the back so that you can have
+# the horses in the back
 import urllib
 import urllib2
 import re

@@ -1,29 +1,30 @@
-# calculates binomial pdf for pulling from
+# (inefficiently) calculates binomial pdf for pulling from
 # headhunting in the game arknights
-# if you don't care about precision and
-# accuracy you can change it from Decimals
-# to floats, only makes a difference after like
-# 10 decimal places lol
+# if you don't care about precision and accuracy you can change
+# it from Decimals to floats, only makes a difference after
+# like 10 decimal places lol
 import itertools
 import math
 from decimal import Decimal
 
+
 def get_P(count, base=Decimal("0.02"), accum=Decimal("0.02")):
-    # get the probability of a success on the "count"th
-    # attempt since the last success, with original
-    # probability "base" and incrementing by "accum"
-    # for each failure after 50 failures in a row
+    # get the probability of a success on the "count"th attempt
+    # since the last success, with original probability "base"
+    # and incrementing by "accum" for each failure after 50
+    # failures in a row
     if count <= 50:
         return base
     else:
         return min(Decimal(1), base+(accum*(count-50)))
 
+
 def P(successes, n, p=Decimal("0.02"), accum=Decimal("0.02")):
-    # get the probability of performing "n" pulls and
-    # only getting successes at each pull number specified
-    # in the list "successes" e.g. P([1, 6], 10) = probability
-    # of success on the first and sixth attempt out of 10, i.e.
-    # P(success AND fail AND fail AND fail AND fail AND success AND fail AND fail AND fail AND fail)
+    # get the probability of performing "n" pulls and only
+    # getting successes at each pull number specified in the
+    # list "successes" e.g. P([1, 3], 5) = probability of
+    # success on the first and third attempt out of 5, i.e.
+    # P(success AND fail AND success AND fail AND fail)
     successes = iter(successes)
 
     next_success = next(successes, -1)
@@ -45,13 +46,13 @@ def P(successes, n, p=Decimal("0.02"), accum=Decimal("0.02")):
             P *= 1-get_P(count, p, accum)
     return P
 
+
 def binompdf(trials, success, p=Decimal("0.02"), accum=Decimal("0.02")):
-    # get the binomial pdf, the probability of getting
-    # "success" successes out of "trials" trials
-    # do note that this can get very slow, it has to
-    # run through (trials choose success) combinations,
-    # for example 70 trials and 5 success
-    # = 70C5 combinations = 12 103 014 combinations
+    # get the binomial pdf, the probability of getting "success"
+    # successes out of "trials" trials do note that this can
+    # get very slow, it has to run through (trials choose
+    # success) combinations, for example 70 trials and 5
+    # success = 70C5 combinations = 12 103 014 combinations
     prob = 0
     standard_p = (p**success)*((1-p)**(trials-success))
 

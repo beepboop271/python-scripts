@@ -1,6 +1,6 @@
-# very basic visualisation of sine wave addition
-# using connected rotating circles, currently just
-# draws a square wave using 3 circles
+# very basic visualisation of sine wave addition using
+# connected rotating circles, currently just draws a square
+# wave using 3 circles
 
 import math
 import time
@@ -8,11 +8,13 @@ import time
 import pygame
 import pygame.gfxdraw
 
+
 class Circle(object):
     def __init__(self, radius, period, phase):
         self.radius = radius
         self.period = period
         self.phase = phase
+
 
 pygame.init()
 
@@ -53,7 +55,6 @@ while running:
     pygame.draw.circle(display, (0, 0, 0), (int_x, int_y), 3)
     for circle in circles:
         pygame.gfxdraw.aacircle(display, int_x, int_y, circle.radius, (0, 0, 0))
-        #pygame.draw.circle(display, (0, 0, 0), (int_x, int_y), circle.radius, 1)
         dx = circle.radius*math.cos(t*TWO_PI/circle.period + circle.phase)
         dy = -circle.radius*math.sin(t*TWO_PI/circle.period + circle.phase)
         pygame.draw.aaline(display, (0, 0, 0), (int_x, int_y), (int(x+dx), int(y+dy)))

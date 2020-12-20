@@ -1,9 +1,9 @@
-# opens an image in a folder and saves 9
-# square images to the folder that together
-# form a 3x3 grid of the original image
-# (was originally used to create 9 discord emojis
-# that combine to form one big emoji lol)
+# opens an image in a folder and saves 9 square images to the
+# folder that together form a 3x3 grid of the original image
+# (was originally used to create 9 discord emojis that combine
+# to form one big emoji lol)
 from PIL import Image
+
 
 def split(folder, filename):
     if folder[-1] != "/" and folder[-1:] != "\\":
@@ -19,5 +19,9 @@ def split(folder, filename):
     name = filename.rsplit(".", 1)[0]
     for y in range(3):
         for x in range(3):
-            im.crop((cell*x, cell*y, cell*x+cell-1, cell*y+cell-1)).save(f"{folder}{name}_grid_{count}.jpg")
+            im.crop(
+                (cell*x, cell*y, cell*x+cell-1, cell*y+cell-1)
+            ).save(
+                f"{folder}{name}_grid_{count}.jpg"
+            )
             count += 1
