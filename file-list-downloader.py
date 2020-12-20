@@ -8,6 +8,8 @@ import requests
 
 
 def download(url_list, save_dir, delay=0.1):
+    if not os.path.isdir(save_dir):
+        raise NotADirectoryError(f"not a directory: {save_dir}")
     for url in url_list:
         res = requests.get(url)
         print("got", url)
